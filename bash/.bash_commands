@@ -1,6 +1,7 @@
 # bookmark command
 
 BM_DIR="$HOME/.bm"
+mkdir -p "$BM_DIR"
 
 bm () { 
         echo "$PWD" | tee "$BM_DIR/$1"
