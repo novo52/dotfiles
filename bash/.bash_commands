@@ -1,8 +1,15 @@
 # bookmark command
+
+BM_DIR="$HOME/.bm"
+
 bm () { 
-        echo "$PWD" | tee "$HOME/.bm/$1"
+        echo "$PWD" | tee "$BM_DIR/$1"
 }
 
 goto () {
-        cd $(cat "$HOME/.bm/$1")
+        cd $(cat "$BM_DIR/$1")
+}
+
+rmbm () {
+	rm "$BM_DIR/$1"
 }
