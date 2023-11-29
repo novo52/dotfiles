@@ -1,4 +1,6 @@
 # bookmark command
+
+mkdir -p ~/.bm
 bm () { 
         echo "$PWD" | tee "$HOME/.bm/$1"
 }
