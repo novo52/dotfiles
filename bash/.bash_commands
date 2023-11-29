@@ -1,0 +1,8 @@
+# bookmark command
+bm () { 
+        echo "$PWD" | tee "$HOME/.bm/$1"
+}
+
+goto () {
+        cd $(cat "$HOME/.bm/$1")
+}
