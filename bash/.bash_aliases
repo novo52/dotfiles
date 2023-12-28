@@ -1,3 +1,5 @@
 alias ls="ls --color=auto --file-type -hN"
-alias vi="vim"
+alias vi="nvim"
+alias vim="nvim"
 alias reload=". ~/.bashrc"
+alias open="xdg-open"

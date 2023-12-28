@@ -10,8 +10,8 @@ if [ -f ~/.bash_system_specific ]; then
     . ~/.bash_system_specific
 fi
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 set +o noclobber
 
 # History
@@ -88,3 +88,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# ctrl-backspace
+stty werase ^H

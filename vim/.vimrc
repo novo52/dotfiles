@@ -14,9 +14,13 @@ vnoremap kj <esc>
 " esc in command mode
 cnoremap kj <C-C>
 
-" dw in insert mode
+" delete shortcuts in insert mode
 inoremap sdf <C-w>
 inoremap df <BS>
+
+" end of line shortcut in insert & visual mode
+inoremap lkj <End>
+vnoremap lkj <End>
 
 set timeoutlen=200
 
