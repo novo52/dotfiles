@@ -22,6 +22,13 @@ inoremap df <BS>
 inoremap lkj <End>
 vnoremap lkj <End>
 
+" relative line numbers
+set number relativenumber
+set cursorline
+set cursorlineopt=number 
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+highlight CursorLineNr term=bold cterm=NONE ctermfg=Gray ctermbg=NONE gui=NONE guifg=Grey guibg=NONE
+
 set timeoutlen=200
 
 " Have Vim jump to the last position when reopening a file
