@@ -1,16 +1,55 @@
-# bookmark command
-
+# Bookmark command
 BM_DIR="$HOME/.bm"
 mkdir -p "$BM_DIR"
 
 bm () { 
-        echo "$PWD" | tee "$BM_DIR/$1"
+    local USAGE="bm [new|go|rm] <name>\nbm list"
+
+    if [[ -z "$1" || ! "$1" =~ ^(new|go|rm|list)$ ]]; then
+    	echo -e $USAGE 
+    	return 1
+    fi
+
+    if [[ -z "$2" && "$1" =~ ^(new|go|rm)$ ]]; then
+    	echo -e $USAGE 
+    	return 1
+    fi
+
+    case $1 in
+        new)
+            if [ -f "$BM_DIR/$2" ]; then
+                echo "Warning: Bookmark '$2' already exists. Overwrite? (y/n)"
+                read -r confirm
+                if [ "$confirm" != "y" ]; then
+                    echo "Bookmark not overwritten."
+                    return 1
+                fi
+            fi
+            echo "$PWD" > "$BM_DIR/$2"
+            echo "Bookmarked '$2' to '$PWD'"
+            ;;
+        go)
+            if [ -f "$BM_DIR/$2" ]; then
+                target_dir=$(cat "$BM_DIR/$2")
+                if [ -d "$target_dir" ]; then
+                    cd "$target_dir" || return
+                else
+                    echo "Error: Directory '$target_dir' no longer exists."
+                fi
+            else
+                echo "No bookmark found for '$2'"
+            fi
+            ;;
+        rm)
+            if [ -f "$BM_DIR/$2" ]; then
+                rm "$BM_DIR/$2"
+                echo "Removed bookmark '$2'"
+            else
+                echo "No bookmark found for '$2'"
+            fi
+            ;;
+	list)
+	    ls "$BM_DIR"
+    esac
 }
 
-goto () {
-        cd $(cat "$BM_DIR/$1")
-}
-
-rmbm () {
-	rm "$BM_DIR/$1"
-}
