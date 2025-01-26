@@ -1,5 +1,7 @@
+
 # Bookmark command
-BM_DIR="$HOME/.bm"
+# Bookmark utility directory
+export BM_DIR=$HOME/.bm
 mkdir -p "$BM_DIR"
 
 bm () { 
