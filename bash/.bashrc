@@ -4,14 +4,18 @@ case $- in
       *) return;;
 esac
 
+# Default editor: vi
+# This will usually end up being vim
+# If nvim is installed, set EDITOR=nvim etc in .bash_system_specific
+export EDITOR=vi
+export VISUAL=vi
+
 # .bashrc is tracked by version control, config specific to this computer
-# # should go in .bash_system_specific
+# should go in .bash_system_specific
 if [ -f ~/.bash_system_specific ]; then
     . ~/.bash_system_specific
 fi
 
-export EDITOR=nvim
-export VISUAL=nvim
 set +o noclobber
 
 # History
