@@ -2,7 +2,6 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/chloe/.zshrc'
@@ -18,8 +17,14 @@ export VISUAL=nvim
 export ZSH=~/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"
-plugins=(git)
+plugins=(git vi-mode)
 export LANG=en_CA.UTF-8
+
+# vi-mode
+VI_MODE_SET_CURSOR=true
+
+
+bindkey -v
 
 # Color
 #export CLICOLOR=1
@@ -29,6 +34,7 @@ export LANG=en_CA.UTF-8
 
 set +o noclobber 
 setopt EXTENDED_GLOB
+
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export GTK_THEME=Adwaita:dark

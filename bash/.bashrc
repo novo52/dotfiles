@@ -83,3 +83,13 @@ fi
 
 # ctrl-backspace
 stty werase ^H
+
+
+export ANTLR_INS="$HOME/builds/antlr/antlr4-install"
+export ANTLR_JAR="$ANTLR_INS/bin/antlr-4.13.0-complete.jar"
+export CLASSPATH="$ANTLR_JAR:$CLASSPATH"
+alias antlr4="java -Xmx500M org.antlr.v4.Tool"
+alias grun='java org.antlr.v4.gui.TestRig'
+export MLIR_INS="/home/chloe/builds/llvm-project/build"
+export MLIR_DIR="$MLIR_INS/lib/cmake/mlir/" # Don't change me.
+export PATH="$MLIR_INS/bin:$PATH" # Don't change me
