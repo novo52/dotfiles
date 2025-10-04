@@ -14,6 +14,9 @@ vnoremap kj <esc>
 " esc in command mode
 cnoremap kj <C-C>
 
+" del
+"inoremap <S-BS> <Del>
+
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
