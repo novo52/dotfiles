@@ -17,6 +17,7 @@ if [ -f ~/.bash_system_specific ]; then
 fi
 
 set +o noclobber
+bind 'set completion-ignore-case on'
 
 # History
 HISTCONTROL=ignoreboth
@@ -83,3 +84,4 @@ fi
 
 # ctrl-backspace
 stty werase ^H
+
