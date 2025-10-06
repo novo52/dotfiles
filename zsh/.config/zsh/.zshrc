@@ -17,14 +17,12 @@ export VISUAL=nvim
 export ZSH=~/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"
-plugins=(git vi-mode)
+plugins=(git zsh-vi-mode)
 export LANG=en_CA.UTF-8
 
 # vi-mode
-VI_MODE_SET_CURSOR=true
-
-
-bindkey -v
+ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
+bindkey -a -r ':' # disable "execute: "
 
 # Color
 #export CLICOLOR=1
