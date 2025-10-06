@@ -1,0 +1,19 @@
+alias reload="source ~/.config/zsh/.zshrc"
+alias open="xdg-open"
+
+ls-seperated () {
+	BASE_PATH=''
+	[[ ((${#*[@]} > 0)) ]] && [[ $@[-1] != -(*) ]] && BASE_PATH="$@[-1]"
+		OUTPUT=`command ls --color --file-type --group-directories-first -w $COLUMNS -xdh --hide="[^.]*" $@` && [[ "$OUTPUT" != $'./\n' ]] && echo "$OUTPUT" && echo
+	#HIDDEN=($BASE_PATH/.*(N))
+	#[[ -n "$HIDDEN" ]] && OUTPUT=`command ls --color --file-type --group-directories-first -w $COLUMNS -xdh $@ $HIDDEN` && [[ -n "$OUTPUT" ]] && echo "$OUTPUT" && echo
+	lsb $@
+}
+
+alias ls='LC_ALL=C ls --color=auto -hF'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias vim='nvim'
