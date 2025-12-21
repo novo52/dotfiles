@@ -22,6 +22,7 @@ export LANG=en_CA.UTF-8
 
 # vi-mode
 ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
+ZVM_VI_VISUAL_ESCAPE_BINDKEY=kj
 bindkey -a -r ':' # disable "execute: "
 
 # Color
@@ -42,5 +43,5 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
-source $ZSH/oh-my-zsh.sh
 source $HOME/.config/zsh/.zsh_aliases
+source $ZSH/oh-my-zsh.sh

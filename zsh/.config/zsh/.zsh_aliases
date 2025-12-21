@@ -17,3 +17,6 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias vim='nvim'
+
+export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
+alias make='nice make -j$NUMCPUS --load-average=$NUMCPUS'
