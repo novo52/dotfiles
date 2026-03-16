@@ -23,3 +23,38 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+-- WGSL highlighting
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'wgsl',
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
+
+-- Treesitter folding
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+
+    -- Only enable if treesitter parser is available for this filetype
+    local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype)
+    if not lang then
+      return
+    end
+
+    local ok = pcall(vim.treesitter.start, buf, lang)
+    if not ok then
+      return
+    end
+
+    -- Enable folding
+    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo[0][0].foldmethod = 'expr'
+    vim.wo[0][0].foldlevel = 99 -- Start with folds open
+
+    -- Optionally enable indentation (experimental)
+    -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})

@@ -29,3 +29,15 @@ vim.o.confirm = true -- Offer to save on exit
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.scrolloff = 10
+
+-- Folding
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.fillchars = {
+  fold = ' ',
+  foldopen = '<',
+  foldclose = '>',
+  foldsep = ' ',
+}

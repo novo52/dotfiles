@@ -18,14 +18,34 @@ require('lazy').setup {
     { import = 'plugins.core' },
     { import = 'plugins.extra.guess-indent' },
     { import = 'plugins.extra.which-key' },
-    { import = 'plugins.extra.leetcode' },
-    -- { import = 'kickstart.plugins.debug'},
-    -- { import = 'kickstart.plugins.indent_line'},
-    -- { import = 'kickstart.plugins.lint'},
-    -- { import = 'kickstart.plugins.autopairs'},
-    -- { import = 'kickstart.plugins.neo-tree'},
-    -- { import = 'kickstart.plugins.gitsigns'}, -- adds gitsigns recommend keymaps
+    -- { import = 'plugins.extra.leetcode' },
+    -- { import = 'plugins.extra.unity' },
+    -- { import = 'plugins.extra.debug'},
+    -- { import = 'plugins.extra.indent_line'},
+    -- { import = 'plugins.extra.lint'},
+    -- { import = 'plugins.extra.autopairs'},
+    { import = 'plugins.extra.neo-tree' },
+    { import = 'plugins.extra.lsp_lines' },
+    { import = 'plugins.extra.fold' },
+    -- { import = 'plugins.extra.gitsigns'}, -- adds gitsigns recommend keymaps
   },
   rocks = { enabled = false },
-  defaults = { lazy = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+  change_detection = {
+    enabled = false,
+    notify = false,
+  },
 }

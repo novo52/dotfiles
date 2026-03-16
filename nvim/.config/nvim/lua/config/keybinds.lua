@@ -8,7 +8,7 @@ vim.g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'i', 'v' }, 'kj', '<Esc>')
 
 -- Toggle visibility of whitespace
-vim.keymap.set('n', '<leader>l', ':set list!<CR>', { noremap = true, silent = true, desc = 'Toggle list mode' })
+vim.keymap.set('n', '<leader>tw', ':set list!<CR>', { noremap = true, silent = true, desc = 'Toggle visible whitespace' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
