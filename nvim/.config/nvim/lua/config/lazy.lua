@@ -27,6 +27,8 @@ require('lazy').setup {
     { import = 'plugins.extra.neo-tree' },
     { import = 'plugins.extra.lsp_lines' },
     { import = 'plugins.extra.fold' },
+    { import = 'plugins.extra.vimtex' },
+    { import = 'plugins.extra.llvm' },
     -- { import = 'plugins.extra.gitsigns'}, -- adds gitsigns recommend keymaps
   },
   rocks = { enabled = false },

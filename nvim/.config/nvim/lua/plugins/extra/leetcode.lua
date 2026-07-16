@@ -8,10 +8,10 @@ return {
     'MunifTanjim/nui.nvim',
   },
   keys = {
-    { '<leader>lr', '<cmd>Leet run<cr>', '[L]eetcode [R]un' },
+    { '<leader>cr', '<cmd>Leet run<cr>', 'Leet[c]ode [R]un' },
   },
   config = function()
-    require('which-key').add { '<leader>l', group = '[L]eetcode' }
+    require('which-key').add { '<leader>c', group = 'Leet[c]ode' }
   end,
   opts = {
     injector = {

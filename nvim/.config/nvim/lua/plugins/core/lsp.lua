@@ -118,6 +118,12 @@ return {
       lspconfig.clangd = {
         capabilities = capabilities,
         filetypes = { 'cpp', 'c', 'h', 'hpp' },
+        cmd = {
+          'clangd',
+          '--background-index',
+          '--cross-file-rename',
+          '--clang-tidy',
+        },
       }
       lspconfig.rust_analyzer = {
         capabilities = capabilities,
