@@ -12,6 +12,7 @@ compinit
 
 export EDITOR=nvim
 export VISUAL=nvim
+export SUDO_EDITOR=$(which nvim)
 
 # oh-my-zsh
 export ZSH=~/.oh-my-zsh

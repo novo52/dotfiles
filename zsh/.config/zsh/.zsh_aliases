@@ -20,3 +20,7 @@ alias vim='nvim'
 
 export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
 alias make='nice make -j$NUMCPUS --load-average=$NUMCPUS'
+
+alias rm='trash'
+
+alias difft='difft --display=side-by-side-show-both'
