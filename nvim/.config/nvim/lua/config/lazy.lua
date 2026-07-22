@@ -29,6 +29,7 @@ require('lazy').setup {
     { import = 'plugins.extra.fold' },
     { import = 'plugins.extra.vimtex' },
     { import = 'plugins.extra.llvm' },
+    { import = 'plugins.extra.claudecode' },
     -- { import = 'plugins.extra.gitsigns'}, -- adds gitsigns recommend keymaps
   },
   rocks = { enabled = false },
