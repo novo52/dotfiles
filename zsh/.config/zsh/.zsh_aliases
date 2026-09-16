@@ -16,4 +16,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias vim='nvim'
+alias make="nice make -j$(nproc)"
+alias cmake="nice cmake"
+
+alias dragon-runner="PYTHONPATH='/cshome/cmput415/.local/lib/python3.8/site-packages:/cshome/tdancey/cmput415/Dragon-Runner/:$PYTHONPATH' nice /usr/bin/python3 -m dragon_runner.src.main "

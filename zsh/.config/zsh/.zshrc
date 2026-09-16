@@ -10,8 +10,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=vim
+export VISUAL=vim
 
 # oh-my-zsh
 export ZSH=~/.oh-my-zsh
@@ -41,6 +41,9 @@ ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
+
+#415 stuff
+emulate ksh -c "/cshome/cmput415/415-resources/415env.sh"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.config/zsh/.zsh_aliases
