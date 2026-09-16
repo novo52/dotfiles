@@ -22,6 +22,7 @@ export LANG=en_CA.UTF-8
 
 # vi-mode
 ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
+ZVM_VI_VISUAL_ESCAPE_BINDKEY=kj
 bindkey -a -r ':' # disable "execute: "
 
 # Color
@@ -45,5 +46,5 @@ fi
 #415 stuff
 emulate ksh -c "/cshome/cmput415/415-resources/415env.sh"
 
-source $ZSH/oh-my-zsh.sh
 source $HOME/.config/zsh/.zsh_aliases
+source $ZSH/oh-my-zsh.sh
