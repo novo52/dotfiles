@@ -1,5 +1,4 @@
 alias reload="source ~/.config/zsh/.zshrc"
-alias open="xdg-open"
 
 ls-seperated () {
 	BASE_PATH=''
@@ -24,3 +23,14 @@ alias make='nice make -j$NUMCPUS --load-average=$NUMCPUS'
 alias rm='trash'
 
 alias difft='difft --display=side-by-side-show-both'
+# -p because the TUI (-t) renders a file given on the command line unwrapped
+alias glow='glow -w $(tput cols) -p'
+
+# Defined after the glow alias so the alias is expanded in the body.
+function open {
+	if [[ $1 == *.md ]]; then
+		glow "$@"
+	else
+		xdg-open "$@"
+	fi
+}
