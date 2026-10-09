@@ -1,0 +1,19 @@
+# Tools the bootstrap installs into $HOME. Tab-separated so POSIX sh can read it
+# with `while IFS="$(printf '\t')" read -r name class version min_glibc source`.
+#
+# class    how the bootstrap installs it
+#   gzbin    gunzip a single binary into ~/.local/bin and chmod +x
+#   tarball  extract into ~/.local/opt/<arch>-glibc<ver>/, symlink the bin/ entries
+#   installer  run the upstream install command; the tool updates itself thereafter
+#   pip      pip install --user
+#
+# min_glibc  the oldest glibc the published artifact runs against, measured with
+#            `objdump -T <binary> | grep -o 'GLIBC_2\.[0-9]*' | sort -V | tail -1`.
+#            A row whose min_glibc exceeds the host's is skipped. "any" means no
+#            glibc version references at all.
+#
+# name	class	version	min_glibc	source
+nvim	tarball	0.12.4	2.31	https://github.com/neovim/neovim/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz
+tree-sitter	gzbin	0.26.3	2.39	https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.3/tree-sitter-linux-x64.gz
+trash-cli	pip	0.23.2.13.2	any	trash-cli==0.23.2.13.2
+claude	installer	latest	any	https://claude.ai/install.sh
