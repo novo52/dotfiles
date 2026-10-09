@@ -39,6 +39,9 @@ setopt EXTENDED_GLOB
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export GTK_THEME=Adwaita:dark
 
+# fnm (Node)
+eval "$(fnm env --use-on-cd --shell zsh)"
+
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
