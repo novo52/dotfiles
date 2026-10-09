@@ -1,4 +1,4 @@
-alias reload="source ~/.config/zsh/.zshrc"
+alias reload="source $ZDOTDIR/.zshrc"
 
 ls-seperated () {
 	BASE_PATH=''
@@ -17,20 +17,27 @@ alias egrep='egrep --color=auto'
 
 alias vim='nvim'
 
+# --load-average bounds the build by machine load rather than by core count,
+# which matters on hosts shared with other people: coronation reports 128 threads.
 export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
 alias make='nice make -j$NUMCPUS --load-average=$NUMCPUS'
+alias cmake='nice cmake'
 
-alias rm='trash'
-
-alias difft='difft --display=side-by-side-show-both'
+# Tools that are present on some machines only.
+(( $+commands[difft] )) && alias difft='difft --display=side-by-side-show-both'
 # -p because the TUI (-t) renders a file given on the command line unwrapped
-alias glow='glow -w $(tput cols) -p'
+(( $+commands[glow] )) && alias glow='glow -w $(tput cols) -p'
 
 # Defined after the glow alias so the alias is expanded in the body.
 function open {
-	if [[ $1 == *.md ]]; then
+	if [[ $1 == *.md ]] && (( $+commands[glow] )); then
 		glow "$@"
-	else
+	elif (( $+commands[xdg-open] )); then
 		xdg-open "$@"
+	elif (( $+commands[wslview] )); then
+		wslview "$@"
+	else
+		print -u2 "open: no handler for $1"
+		return 1
 	fi
 }
