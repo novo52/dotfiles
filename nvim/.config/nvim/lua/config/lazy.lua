@@ -30,6 +30,7 @@ require('lazy').setup {
     { import = 'plugins.extra.vimtex' },
     { import = 'plugins.extra.llvm' },
     { import = 'plugins.extra.claudecode' },
+    { import = 'plugins.extra.firenvim' },
     -- { import = 'plugins.extra.gitsigns'}, -- adds gitsigns recommend keymaps
   },
   rocks = { enabled = false },
