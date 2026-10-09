@@ -13,6 +13,16 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
+-- Plugins that only make sense on one machine live in that machine's overlay,
+-- stowed to ~/.config/host/nvim. The directory is absent on a machine without
+-- one, and then no host plugins load.
+local host_config = vim.fn.expand '~/.config/host/nvim'
+local host_spec = {}
+if (vim.uv or vim.loop).fs_stat(host_config .. '/lua/plugins/host') then
+  rtp:append(host_config)
+  host_spec = { { import = 'plugins.host' } }
+end
+
 require('lazy').setup {
   spec = {
     { import = 'plugins.core' },
@@ -30,8 +40,8 @@ require('lazy').setup {
     { import = 'plugins.extra.vimtex' },
     { import = 'plugins.extra.llvm' },
     { import = 'plugins.extra.claudecode' },
-    { import = 'plugins.extra.firenvim' },
     -- { import = 'plugins.extra.gitsigns'}, -- adds gitsigns recommend keymaps
+    unpack(host_spec),
   },
   rocks = { enabled = false },
   performance = {
