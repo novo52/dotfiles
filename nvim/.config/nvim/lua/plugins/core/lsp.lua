@@ -135,8 +135,7 @@ return {
     build = ':TSUpdate',
     lazy = false, -- IMPORTANT: This plugin should NOT be lazy-loaded
     config = function()
-      -- Install parsers
-      require('nvim-treesitter').install {
+      local wanted = {
         'wgsl',
         'bash',
         'c',
@@ -151,6 +150,28 @@ return {
         'vim',
         'vimdoc',
       }
+
+      local ts = require 'nvim-treesitter'
+      local installed = {}
+      for _, lang in ipairs(ts.get_installed()) do
+        installed[lang] = true
+      end
+      local missing = vim.tbl_filter(function(lang)
+        return not installed[lang]
+      end, wanted)
+
+      if #missing == 0 then
+        return
+      end
+
+      -- Parsers are compiled by `tree-sitter build`, so without the CLI on PATH
+      -- every startup re-downloads the grammars and discards them.
+      if vim.fn.executable 'tree-sitter' == 0 then
+        vim.notify(string.format('nvim-treesitter: %d parsers missing, and the tree-sitter CLI is not on PATH', #missing), vim.log.levels.WARN)
+        return
+      end
+
+      ts.install(missing)
     end,
   },
   { -- Autoformat
