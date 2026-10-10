@@ -453,6 +453,10 @@ nvim_plugins() {
   out=$(nvim --headless "+luafile $DOTFILES_DIR/bootstrap/nvim-provision.lua" +qa 2>> "$LOG" < /dev/null | tr -d '\r' | grep '^provisioned:')
   if [ -n "$out" ]; then
     result ok plugins "${out#provisioned: }"
+    servers=${out##*, }
+    if [ "${servers%% of *}" != "$(printf '%s' "${servers#* of }" | cut -d' ' -f1)" ]; then
+      result skip language-servers "mason installed only $servers; it needs unzip, tar and gzip"
+    fi
   else
     show_log_tail
     result fail plugins "nvim did not finish provisioning"
@@ -590,7 +594,7 @@ cmd_install() {
 cmd_verify() {
   detect
   WANT_FONT_PACKAGE=no
-  [ -L "$HOME/.config/fontconfig/fonts.conf" ] && WANT_FONT_PACKAGE=yes
+  [ -L "$HOME/.config/fontconfig/fonts.conf" ] && have fc-match && WANT_FONT_PACKAGE=yes
   verify
   report || exit 1
 }

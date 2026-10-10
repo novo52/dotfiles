@@ -19,7 +19,7 @@
 #            "any" means no glibc version references at all.
 #
 # name	class	version	min_glibc	source
-nvim	tarball	0.12.4	2.31	https://github.com/neovim/neovim/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz
+nvim	tarball	0.12.4	2.17	https://github.com/neovim/neovim-releases/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz
 micromamba	binary	2.9.0	any	https://github.com/mamba-org/micromamba-releases/releases/download/2.9.0-0/micromamba-linux-64
 trash-cli	pip	0.23.2.13.2	any	trash-cli==0.23.2.13.2
 claude	installer	latest	any	https://claude.ai/install.sh

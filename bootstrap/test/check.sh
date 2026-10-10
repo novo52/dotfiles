@@ -63,10 +63,14 @@ else
 fi
 
 start=$(bash -lc "zsh -ic 'nvim --headless \"+sleep 2\" +qa'" 2>&1 < /dev/null | tr -d '\r')
-if bash -lc "zsh -ic 'command -v cc || command -v gcc'" > /dev/null 2>&1; then
+parsers=$(in_zsh 'nvim --headless "+lua io.stdout:write(#require([[nvim-treesitter]]).get_installed())" +qa' | tr -dc '0-9')
+# Parsers need a compiler to build. A machine without one has them only when
+# another machine sharing the home built them.
+if [ "${parsers:-0}" -ge 13 ]; then
+  pass "$parsers treesitter parsers present"
   expect "nvim starts without messages" "$start" ''
-  parsers=$(in_zsh 'nvim --headless "+lua io.stdout:write(#require([[nvim-treesitter]]).get_installed())" +qa' | tr -dc '0-9')
-  [ "${parsers:-0}" -ge 13 ] && pass "$parsers treesitter parsers built" || fail "only '${parsers:-}' treesitter parsers"
+elif bash -lc "zsh -ic 'command -v cc || command -v gcc'" > /dev/null 2>&1; then
+  fail "only '${parsers:-}' treesitter parsers, with a compiler present"
 else
   expect "nvim says parsers need a compiler" "$start" '*C compiler*'
 fi

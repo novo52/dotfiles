@@ -46,7 +46,7 @@ EOF
     fedora-sudo)
       cat << 'EOF'
 FROM fedora:latest
-RUN dnf install -y sudo tar gzip findutils util-linux-script || dnf install -y sudo tar gzip findutils util-linux
+RUN dnf install -y sudo tar gzip findutils diffutils util-linux-script || dnf install -y sudo tar gzip findutils diffutils util-linux
 RUN useradd -m -u 1234 -s /bin/bash tester && echo 'tester ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/tester
 EOF
       ;;

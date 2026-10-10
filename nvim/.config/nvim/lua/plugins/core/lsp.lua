@@ -179,8 +179,10 @@ return {
         return
       end
 
-      -- Kept reachable so a headless provisioning run can wait on the build:
-      --   nvim --headless '+lua TreesitterInstall:wait(600000)' +qa
+      -- Kept reachable so a headless provisioning run can wait on the build
+      -- and retry what a failed download left out; see
+      -- bootstrap/nvim-provision.lua.
+      TreesitterMissing = missing
       TreesitterInstall = ts.install(missing)
     end,
   },
