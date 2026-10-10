@@ -12,4 +12,11 @@ case $- in
   *i*) [ -z "$ZSH_VERSION" ] && [ -z "$NO_ZSH" ] && command -v zsh >/dev/null 2>&1 && exec zsh -l ;;
 esac
 
-[ -f ~/.bashrc ] && . ~/.bashrc
+# bash reads ~/.profile only when this file is absent, so read it here: it is
+# where a distro or an installer puts PATH entries. The stock one sources
+# ~/.bashrc itself.
+if [ -r ~/.profile ]; then
+  . ~/.profile
+elif [ -f ~/.bashrc ]; then
+  . ~/.bashrc
+fi
