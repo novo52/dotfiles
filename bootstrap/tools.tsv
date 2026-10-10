@@ -5,7 +5,7 @@
 # comes from `conda-linux-64.lock` via micromamba; see README.md.
 #
 # class    how the bootstrap installs it
-#   gzbin    gunzip a single binary into ~/.local/bin and chmod +x
+#   binary   a single executable, saved into ~/.local/opt/<arch>-glibc<ver>/
 #   tarball  extract into ~/.local/opt/<arch>-glibc<ver>/, symlink the bin/ entries
 #   installer  run the upstream install command; the tool updates itself thereafter
 #   pip      pip install --user
@@ -20,7 +20,7 @@
 #
 # name	class	version	min_glibc	source
 nvim	tarball	0.12.4	2.31	https://github.com/neovim/neovim/releases/download/v0.12.4/nvim-linux-x86_64.tar.gz
-micromamba	tarball	2.9.0	any	https://micro.mamba.pm/api/micromamba/linux-64/latest
+micromamba	binary	2.9.0	any	https://github.com/mamba-org/micromamba-releases/releases/download/2.9.0-0/micromamba-linux-64
 trash-cli	pip	0.23.2.13.2	any	trash-cli==0.23.2.13.2
 claude	installer	latest	any	https://claude.ai/install.sh
 nerd-font	fontarchive	3.5.1	any	https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/JetBrainsMono.tar.xz

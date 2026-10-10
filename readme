@@ -1,5 +1,7 @@
+Shell, editor, terminal and git configuration, as GNU stow packages.
 
-Setup using GNU stow
-https://www.gnu.org/software/stow/manual/stow.html
+New machine:
 
+    curl -fsSL https://raw.githubusercontent.com/novo52/dotfiles/main/bootstrap/bootstrap.sh | sh
 
+See bootstrap/README.md.

@@ -5,6 +5,13 @@
 # in /etc. A host overlay supplies this file where one is needed.
 [ -r ~/.bash_profile_local ] && . ~/.bash_profile_local
 
+# On a machine without a system zsh, the bootstrap puts one in ~/.local/bin,
+# which has to be on PATH before the check below can find it.
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) PATH=$HOME/.local/bin:$PATH ;;
+esac
+
 # Interactive sessions go to zsh. The guard matters: without it, scp, rsync and
 # `ssh host cmd` would also exec a login shell and break.
 #

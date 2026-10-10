@@ -1,5 +1,31 @@
 # bootstrap
 
+`bootstrap.sh` sets this configuration up on a machine that has a POSIX shell and `curl` or `wget`, and nothing else:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/novo52/dotfiles/main/bootstrap/bootstrap.sh | sh
+```
+
+It needs no credentials and no root. Where `sudo` works it installs distro packages; where it does not, the same tools come from conda-forge. It ends by checking its own result and printing what was installed, skipped and failed. Running it again updates the machine, and it installs itself as `dots`:
+
+| | |
+|---|---|
+| `dots` | install or update |
+| `dots --minimal` | leave out nvim plugins, Claude Code and trash-cli |
+| `dots --no-sudo` | take everything from conda-forge even where sudo works |
+| `dots private <package ...>` | clone the private overlay through `gh` and stow the named packages |
+| `dots verify` | run the checks, change nothing |
+
+Files already in the way of a link, such as a distro's stock `~/.bashrc`, are moved to `~/.local/share/dotfiles-backups/<date>/`.
+
+It refuses to run on a system without glibc, and on an architecture other than x86_64.
+
+## Testing
+
+`test/run.sh` runs the bootstrap from nothing in disposable Docker containers — Ubuntu 20.04 without root, Ubuntu 24.04 and Fedora with sudo, Alpine as the refusal case, and two distros sharing one home — twice each, then checks the result through a login shell. It tests the working tree, committed or not.
+
+## Where tools come from
+
 Tools that live in `$HOME` rather than in a system package arrive in two layers.
 
 ## Layer 1 — micromamba and conda-forge
@@ -11,6 +37,8 @@ micromamba create -y -p ~/.local/opt/<arch>-glibc<ver>/env -f conda-linux-64.loc
 ```
 
 and the chosen binaries are symlinked into `~/.local/bin`, which `.zshenv` puts first on PATH. Current contents: `tree-sitter`, `rg`, `fd`, `fzf`.
+
+`conda-linux-64-base.lock` holds `zsh`, `git`, `stow` and `gh`, 338 MB installed. Its environment is created only on a machine whose system lacks at least one of them, and only the missing ones are linked.
 
 conda-forge is the channel this fetches from. Two of its properties are why it is the default source here:
 

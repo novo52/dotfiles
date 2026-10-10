@@ -164,14 +164,24 @@ return {
         return
       end
 
-      -- Parsers are compiled by `tree-sitter build`, so without the CLI on PATH
-      -- every startup re-downloads the grammars and discards them.
+      -- Parsers are compiled by `tree-sitter build`, which shells out to a C
+      -- compiler. Without both on PATH every startup re-downloads the grammars
+      -- and discards them.
+      local needs = {}
       if vim.fn.executable 'tree-sitter' == 0 then
-        vim.notify(string.format('nvim-treesitter: %d parsers missing, and the tree-sitter CLI is not on PATH', #missing), vim.log.levels.WARN)
+        needs[#needs + 1] = 'the tree-sitter CLI'
+      end
+      if vim.fn.executable 'cc' == 0 and vim.fn.executable 'gcc' == 0 and vim.fn.executable 'clang' == 0 then
+        needs[#needs + 1] = 'a C compiler'
+      end
+      if #needs > 0 then
+        vim.notify(string.format('nvim-treesitter: %d parsers missing; building them needs %s on PATH', #missing, table.concat(needs, ' and ')), vim.log.levels.WARN)
         return
       end
 
-      ts.install(missing)
+      -- Kept reachable so a headless provisioning run can wait on the build:
+      --   nvim --headless '+lua TreesitterInstall:wait(600000)' +qa
+      TreesitterInstall = ts.install(missing)
     end,
   },
   { -- Autoformat
