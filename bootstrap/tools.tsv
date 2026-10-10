@@ -9,6 +9,9 @@
 #   tarball  extract into ~/.local/opt/<arch>-glibc<ver>/, symlink the bin/ entries
 #   installer  run the upstream install command; the tool updates itself thereafter
 #   pip      pip install --user
+#   fontarchive  extract the *NLNerdFontMono* styles into ~/.local/share/fonts,
+#                then fc-cache -f. That path needs no root and works everywhere;
+#                the laptop's copy currently sits in /usr/share/fonts instead.
 #
 # min_glibc  the oldest glibc the published artifact runs against, measured with
 #            `objdump -T <binary> | grep -o 'GLIBC_2\.[0-9]*' | sort -V | tail -1`.
@@ -20,3 +23,4 @@ nvim	tarball	0.12.4	2.31	https://github.com/neovim/neovim/releases/download/v0.1
 micromamba	tarball	2.9.0	any	https://micro.mamba.pm/api/micromamba/linux-64/latest
 trash-cli	pip	0.23.2.13.2	any	trash-cli==0.23.2.13.2
 claude	installer	latest	any	https://claude.ai/install.sh
+nerd-font	fontarchive	3.5.1	any	https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/JetBrainsMono.tar.xz

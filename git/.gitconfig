@@ -1,0 +1,24 @@
+[user]
+	name = Chloe Dancey
+	email = 22119302+novo52@users.noreply.github.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+
+# `gh` is found on PATH rather than by absolute path, since it is /usr/bin/gh on
+# some machines and under a user prefix on others.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+# Anything true of one machine only. `diff.external` lives here, because an
+# external differ configured on a machine that lacks the binary breaks every
+# `git diff`. Git reads this file if it exists and ignores a missing one.
+[include]
+	path = ~/.config/host/git/config
