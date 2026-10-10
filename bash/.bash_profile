@@ -6,8 +6,11 @@
 [ -r ~/.bash_profile_local ] && . ~/.bash_profile_local
 
 # Interactive sessions go to zsh. The guard matters: without it, scp, rsync and
-# `ssh host cmd` would also exec a login shell and break. NO_ZSH=1 is the way
-# back in when zsh itself is the problem.
+# `ssh host cmd` would also exec a login shell and break.
+#
+# NO_ZSH=1 is the way back in when zsh itself is the problem. ssh does not
+# forward the variable, so set it on the remote side:
+#   ssh -t host 'NO_ZSH=1 bash -l'
 case $- in
   *i*) [ -z "$ZSH_VERSION" ] && [ -z "$NO_ZSH" ] && command -v zsh >/dev/null 2>&1 && exec zsh -l ;;
 esac
