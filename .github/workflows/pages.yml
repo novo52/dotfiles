@@ -30,10 +30,16 @@ jobs:
       - name: Assemble the site
         run: |
           mkdir site
-          # Pages serves index.html for the bare URL; the same script is also
-          # there under its own name.
-          cp bootstrap/bootstrap.sh site/index.html
+          # Pages serves bootstrap.sh as application/x-sh, which a browser
+          # downloads, and index.html for the bare URL as text/html.
           cp bootstrap/bootstrap.sh site/bootstrap.sh
+          # The index is the script under one extra first line: a comment to
+          # sh, and to a browser a redirect to the downloadable copy with the
+          # rest of the page commented out.
+          {
+            printf '%s\n' "#<script>location.replace('bootstrap.sh')</script><!--"
+            cat bootstrap/bootstrap.sh
+          } > site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
