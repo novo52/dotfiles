@@ -37,9 +37,15 @@ function open {
 		(( $+commands[xdg-open] )) && xdg-open "$@" &> /dev/null && return
 		if (( $+commands[wslview] )); then
 			wslview "$@"
-		else
+		elif [[ $1 == *://* || $1 == [A-Za-z]:\\* ]]; then
+			rundll32.exe url.dll,FileProtocolHandler "$1"
+		elif [[ -e $1 ]]; then
 			# explorer.exe would open a File Explorer window for a \\wsl.localhost file.
-			rundll32.exe url.dll,FileProtocolHandler "$([[ -e $1 ]] && wslpath -w "$1" || print -r -- "$1")"
+			rundll32.exe url.dll,FileProtocolHandler "$(wslpath -w "$1")"
+		else
+			# An unquoted C:\... path reaches here with its backslashes stripped.
+			print -u2 "open: no such file: $1"
+			return 1
 		fi
 	elif (( $+commands[xdg-open] )); then
 		xdg-open "$@"
