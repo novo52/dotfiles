@@ -56,6 +56,7 @@ fi
 
 source $ZDOTDIR/.zsh_aliases
 source $ZSH/oh-my-zsh.sh
+source $ZDOTDIR/dotfiles-sync.zsh
 
 # This machine's interactive configuration, then anything untracked. Both come
 # last so they can override the shared configuration and oh-my-zsh alike.
