@@ -29,7 +29,7 @@ alias cmake='nice cmake'
 (( $+commands[glow] )) && alias glow='glow -w $(tput cols) -p'
 
 # Defined after the glow alias so the alias is expanded in the body.
-function open {
+function _open_one {
 	if [[ $1 == *.md ]] && (( $+commands[glow] )); then
 		glow "$@"
 	elif (( $+commands[rundll32.exe] )); then
@@ -55,4 +55,17 @@ function open {
 		print -u2 "open: no handler for $1"
 		return 1
 	fi
+}
+
+# The handlers accept one target each, so every target gets its own call.
+function open {
+	if (( $# == 0 )); then
+		print -u2 "usage: open FILE..."
+		return 1
+	fi
+	local target rc=0
+	for target; do
+		_open_one "$target" || rc=1
+	done
+	return $rc
 }
