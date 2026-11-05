@@ -27,6 +27,8 @@ alias cmake='nice cmake'
 (( $+commands[difft] )) && alias difft='difft --display=side-by-side-show-both'
 # -p because the TUI (-t) renders a file given on the command line unwrapped
 (( $+commands[glow] )) && alias glow='glow -w $(tput cols) -p'
+# -n because a click on the window would otherwise open the file instead of dragging it
+(( $+commands[ripdrag] )) && alias drag='ripdrag -x -n -b'
 
 # Defined after the glow alias so the alias is expanded in the body.
 function _open_one {
